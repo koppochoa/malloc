@@ -38,7 +38,7 @@ void *available(struct Region *region, size_t size)
     // region vide
     if (first == NULL)
     {
-        printf("First Element\n");
+        // printf("First Element\n");
         struct Block *newblock =
             create_block(region->ptr, aligned_size, NULL, region);
         region->first = newblock;
@@ -55,7 +55,7 @@ void *available(struct Region *region, size_t size)
         // Freed block
         if (first->free == true && first->len >= aligned_size)
         {
-            printf("Using Freed Element\n");
+            // printf("Using Freed Element\n");
 
             first->len = aligned_size;
             first->free = false;
@@ -73,7 +73,7 @@ void *available(struct Region *region, size_t size)
 
             if (delta >= aligned_size + sizeof(struct Block))
             {
-                printf("Added Next to End\n");
+                // printf("Added Next to End\n");
 
                 // taille ok , creer nouveau block
 
@@ -93,7 +93,7 @@ void *available(struct Region *region, size_t size)
 
             if (delta >= aligned_size + sizeof(struct Block))
             {
-                printf("Added Between\n");
+                // printf("Added Between\n");
 
                 // taille ok , creer nouveau block
 
@@ -111,6 +111,30 @@ void *available(struct Region *region, size_t size)
     }
 
     return NULL;
+}
+
+void *can_realloc(struct Block *block, size_t size)
+{
+    size_t aligned_size = ALIGN(size) + sizeof(struct Block);
+    size_t delta;
+
+    if (block->next)
+    {
+        delta = (size_t)((char *)block->next - (char *)block);
+    }
+    else
+    {
+        char *block_end = (char *)block + block->len;
+        size_t offset = (size_t)(block_end - block->org->ptr);
+
+        delta = block->org->len - offset;
+    }
+
+    if (aligned_size > delta)
+        return NULL;
+
+    block->len = aligned_size;
+    return (char *)block + sizeof(struct Block);
 }
 
 int free_region(struct Region *reg)

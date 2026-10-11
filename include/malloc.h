@@ -5,6 +5,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <sys/mman.h>
+#include <string.h>
 
 #define ALIGNMENT 8
 #define ALIGN(size) (((size) + (ALIGNMENT - 1)) & ~(ALIGNMENT - 1))
@@ -46,6 +47,7 @@ struct Block *create_block(char *addr, size_t size, struct Block *next,
 void init_mem(void);
 size_t toPageSize(size_t size);
 void *available(struct Region *region, size_t size);
+void* can_realloc(struct Block* block, size_t size);
 int free_region(struct Region *reg);
 void dump_memory(struct Region *reg);
 void print_mem(struct Region *reg);

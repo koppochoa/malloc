@@ -22,6 +22,6 @@ void simple_calloc(void);
 
 // realloc tests
 
-
+void simple_realloc(void);
 
 #endif // TESTS_H

@@ -3,3 +3,4 @@ tests_build
 Dockerfile
 *.bin
 testsuite
+.DS_Store

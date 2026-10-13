@@ -35,6 +35,7 @@ void *available(struct Region *region, size_t size)
 
     struct Block *first = region->first;
 
+
     // region vide
     if (first == NULL)
     {

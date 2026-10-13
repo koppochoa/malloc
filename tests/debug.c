@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#include "malloc.h"
+#include "tests.h"
 
 void dump_memory(struct Region *reg)
 {

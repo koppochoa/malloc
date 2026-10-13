@@ -6,7 +6,8 @@ void run_tests(void)
     // multiple_malloc();
     // inbetween_malloc();
     // simple_calloc();
-    simple_realloc();
+    // simple_realloc();
+    advanced_realloc();
 }
 
 void simple_malloc(void)
@@ -118,4 +119,39 @@ void simple_realloc(void)
     dump_memory(&regions[0]);
 
     free(v2);
+}
+
+void advanced_realloc(void)
+{
+    int *val = malloc(sizeof(int) * 10);
+
+    for (int i = 0; i < 10; i++)
+    {
+        val[i] = i * i * i;
+    }
+
+    print_mem(regions);
+
+    printf("Val[0] : %d", val[0]);
+
+    int *v2 = realloc(val, sizeof(int) * 100);
+
+    for (int i = 1; i < 100; i++)
+    {
+        v2[i] = i * i;
+    }
+
+    for (int i = 0; i < 100; i++)
+    {
+        printf(" %d", v2[i]);
+
+        if (i % 10 == 0)
+            printf("\n");
+    }
+    printf("\n");
+
+    print_mem(regions);
+
+    free(v2);
+    dump_memory(&regions[0]);
 }

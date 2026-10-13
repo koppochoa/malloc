@@ -23,5 +23,9 @@ void simple_calloc(void);
 // realloc tests
 
 void simple_realloc(void);
+void advanced_realloc(void);
+
+void dump_memory(struct Region *reg);
+void print_mem(struct Region *reg);
 
 #endif // TESTS_H

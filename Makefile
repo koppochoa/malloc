@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-std=c99 -pedantic -Werror -Wall -Wextra -Wvla -Iinclude -g -O0
+CFLAGS=-std=c99 -pedantic -Werror -Wall -Wextra -Wvla -fvisibility=hidden -fPIC
 LDFLAGS=
 
 TESTS_SRCS=$(shell find tests -name '*.c')
@@ -10,7 +10,7 @@ OBJS=$(patsubst src/%.c, build/%.o, $(SRCS))
 
 TARGET=libmalloc.so
 
-lib: $(OBJS)
+library: $(OBJS)
 	$(CC) -shared -o $(TARGET) $^ $(LDFLAGS)
 
 build/%.o: src/%.c
@@ -22,7 +22,7 @@ tests: $(TESTS_OBJS)
 
 tests_build/%.o: tests/%.c
 	mkdir -p $(dir $@)
-	$(CC) -Iinclude -O0 -g -c $< -o $@
+	$(CC) $(CFLAGS) -Isrc -O0 -g -c $< -o $@
 
 clean: 
 	rm -r build

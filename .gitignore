@@ -4,3 +4,5 @@ Dockerfile
 *.bin
 testsuite
 .DS_Store
+*.md
+*.so

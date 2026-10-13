@@ -66,7 +66,9 @@ void free(void *ptr)
     if (md->org->used == 1)
     {
         free_region(md->org);
+        return;
     }
 
+    md->org->used--;
     md->free = true;
 }

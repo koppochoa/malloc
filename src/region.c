@@ -17,7 +17,7 @@ struct Region create_region(size_t size)
     res.ptr = ptr;
     res.len = len;
     res.first = NULL;
-
+    res.used = 0;
     regions_count++;
 
     return res;
